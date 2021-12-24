@@ -26,12 +26,12 @@ public class ModelCustomArmour extends ModelBiped
 	public ModelRendererTurbo[] rightLegModel = new ModelRendererTurbo[0];
 	public ModelRendererTurbo[] skirtFrontModel = new ModelRendererTurbo[0]; //Acts like a leg piece, but its pitch is set to the maximum of the two legs
 	public ModelRendererTurbo[] skirtRearModel = new ModelRendererTurbo[0]; //Acts like a leg piece, but its pitch is set to the minimum of the two legs
-	
+
+	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		GlStateManager.pushMatrix();
 		GlStateManager.scale(type.modelScale, type.modelScale, type.modelScale);
-		isSneak = entity.isSneaking();
 		ItemStack itemstack = ((EntityLivingBase)entity).getItemStackFromSlot(EntityEquipmentSlot.MAINHAND);
 		rightArmPose = itemstack.isEmpty() ? ArmPose.EMPTY : ArmPose.ITEM;
 		
@@ -50,7 +50,7 @@ public class ModelCustomArmour extends ModelBiped
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		if(isSneak)
 		{
-			GlStateManager.translate(0.0F, 0.4F, 0.0F);
+			GlStateManager.translate(0.0F, 0.8F, 0.0F);
 		}
 		render(headModel, bipedHead, f5, type.modelScale);
 		render(bodyModel, bipedBody, f5, type.modelScale);

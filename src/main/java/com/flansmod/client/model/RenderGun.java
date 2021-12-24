@@ -71,6 +71,7 @@ public class RenderGun implements CustomItemRenderer
 		//The model scale
 		float f = 1F / 16F;
 		ModelGun model = gunType.model;
+		EntityLivingBase entity = (EntityLivingBase) data[1];
 		
 		int flip = hand == EnumHand.OFF_HAND ? -1 : 1;
 		
@@ -96,6 +97,7 @@ public class RenderGun implements CustomItemRenderer
 				}
 				case EQUIPPED:
 				{
+					float crouchOffset = entity.isSneaking() ? -0.18F : 0.0F;
 					if(hand == EnumHand.OFF_HAND)
 					{
 						GlStateManager.rotate(-70F, 1F, 0F, 0F);
@@ -110,7 +112,7 @@ public class RenderGun implements CustomItemRenderer
 						GlStateManager.translate(0.2F, 0.05F, -0F);
 						GlStateManager.scale(1F, 1F, -1F);
 					}
-					GlStateManager.translate(model.thirdPersonOffset.x, model.thirdPersonOffset.y, model.thirdPersonOffset.z);
+					GlStateManager.translate(model.thirdPersonOffset.x, model.thirdPersonOffset.y + crouchOffset, model.thirdPersonOffset.z);
 					/*
 					if(animations.meleeAnimationProgress > 0 && animations.meleeAnimationProgress < gunType.meleePath.size()) 
 					{
